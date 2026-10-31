@@ -1,5 +1,7 @@
 import path from 'path'
-import { buildFigmaConfig } from '@payloadcms/figma'
+import { buildConfig } from 'payload'
+import { postgresAdapter } from '@payloadcms/db-postgres'
+import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import { mcpPlugin } from '@payloadcms/plugin-mcp'
 import { en as adminLanguage } from '@payloadcms/translations/languages/en'
 import { fileURLToPath } from 'url'
@@ -17,7 +19,7 @@ import { CardInteractions } from './collections/CardInteractions'
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-export default buildFigmaConfig({
+export default buildConfig({
   admin: {
     user: Admins.slug,
     constrainWidth: true,
@@ -32,6 +34,13 @@ export default buildFigmaConfig({
       baseDir: path.resolve(dirname),
     },
   },
+  db: postgresAdapter({
+    pool: {
+      connectionString: process.env.DATABASE_URL || 'postgresql://localhost:5432/dua',
+    },
+  }),
+  editor: lexicalEditor(),
+  secret: process.env.PAYLOAD_SECRET || 'CHANGE-ME-IN-PRODUCTION',
   i18n: {
     fallbackLanguage: 'en',
     supportedLanguages: { 'en': adminLanguage },
@@ -46,5 +55,4 @@ export default buildFigmaConfig({
     outputFile: path.resolve(dirname, 'payload-types.ts'),
   },
   plugins: [mcpPlugin({})],
-  figma: {},
 })

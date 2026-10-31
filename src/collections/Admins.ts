@@ -5,7 +5,7 @@ const isPayloadAdmin: Access = ({ req }) => req.user?.collection === 'admins'
 export const Admins: CollectionConfig = {
   slug: 'admins',
   access: {
-    create: () => false,
+    create: isPayloadAdmin,
     delete: isPayloadAdmin,
     read: isPayloadAdmin,
     update: isPayloadAdmin,
