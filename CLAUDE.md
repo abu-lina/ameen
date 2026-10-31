@@ -78,4 +78,4 @@ All UI lives in a single `'use client'` page (`src/app/(frontend)/page.tsx`) wit
 - Never expose raw management keys or hashes to other clients.
 - `anonymousCard()` (`src/lib/card-privacy.ts`) strips author/key fields before returning cards to the browser.
 - `sec-fetch-site: cross-site` requests are rejected at the API route entry.
-- Payload Admin (`/admin`) uses `admins` collection (Figma SSO); never mix with app `users` accounts.
+- Payload Admin (`/admin`) uses `admins` collection (email/password auth); never mix with app `users` accounts.

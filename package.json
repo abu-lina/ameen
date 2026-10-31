@@ -1,5 +1,5 @@
 {
-  "name": "figma-make-app",
+  "name": "dua-app",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -13,16 +13,14 @@
     "payload": "NODE_OPTIONS=--no-deprecation payload"
   },
   "dependencies": {
-    "@payloadcms/figma": "1.0.0-beta.1",
+    "@payloadcms/db-postgres": "4.0.0-beta.1",
     "@payloadcms/next": "4.0.0-beta.1",
-    "@payloadcms/plugin-cloud-storage": "4.0.0-beta.1",
     "@payloadcms/plugin-mcp": "4.0.0-beta.1",
     "@payloadcms/richtext-lexical": "4.0.0-beta.1",
     "@payloadcms/translations": "4.0.0-beta.1",
     "@payloadcms/ui": "4.0.0-beta.1",
     "compromise": "^14.19.0",
     "graphql": "^16.8.1",
-    "html-react-parser": "^5.2.10",
     "monaco-editor": "0.55.1",
     "next": "16.4.3",
     "payload": "4.0.0-beta.1",
