@@ -22,7 +22,7 @@
     "compromise": "^14.19.0",
     "graphql": "^16.8.1",
     "monaco-editor": "0.55.1",
-    "next": "16.4.3",
+    "next": "16.4.5",
     "payload": "4.0.0-beta.1",
     "react": "19.2.1",
     "react-dom": "19.2.1",
