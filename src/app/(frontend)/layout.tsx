@@ -1,5 +1,6 @@
 import React from "react"
 import type { Metadata, Viewport } from "next"
+import { LanguageProvider } from "@/providers/LanguageProvider"
 import "./styles.css"
 
 const title = "still"
@@ -31,9 +32,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen bg-white text-zinc-950 antialiased">
-        <div id="root" tabIndex={-1}>
-          {children}
-        </div>
+        <LanguageProvider>
+          <div id="root" tabIndex={-1}>
+            {children}
+          </div>
+        </LanguageProvider>
       </body>
     </html>
   )
