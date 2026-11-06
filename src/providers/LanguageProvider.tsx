@@ -1,78 +1,86 @@
 'use client'
 
-import { createContext, useCallback, useContext, useEffect, useState } from 'react'
-import { LANGUAGES, translations, type Language, type TranslationKeys } from '@/translations'
+import { createContext, useContext, useState, useEffect, useCallback, useMemo, type ReactNode } from 'react'
+import { en } from '@/translations/en'
+import { de } from '@/translations/de'
 
-const STORAGE_KEY = 'ameen-lang'
-const DEFAULT_LANG: Language = 'en'
+export const LANGUAGES = ['en', 'de'] as const
+export type Language = (typeof LANGUAGES)[number]
 
-type LanguageContextValue = {
-  language: Language
-  setLanguage: (lang: Language) => void
-  t: (key: string, vars?: Record<string, string | number>) => string
-}
+const translations: Record<Language, typeof en> = { en, de }
 
-const LanguageContext = createContext<LanguageContextValue | null>(null)
-
-function resolve(obj: unknown, path: string): string {
-  let current = obj
-  for (const segment of path.split('.')) {
-    if (current == null || typeof current !== 'object') return path
-    current = (current as Record<string, unknown>)[segment]
-  }
-  return typeof current === 'string' ? current : path
+const LANGUAGE_MAPPING: Record<string, Language> = {
+  en: 'en', de: 'de',
+  'en-us': 'en', 'en-gb': 'en', 'en-ca': 'en', 'en-au': 'en',
+  'de-de': 'de', 'de-at': 'de', 'de-ch': 'de',
 }
 
 function detectLanguage(): Language {
-  if (typeof navigator === 'undefined') return DEFAULT_LANG
-  for (const tag of navigator.languages ?? []) {
-    const code = tag.split('-')[0].toLowerCase()
-    if ((LANGUAGES as readonly string[]).includes(code)) return code as Language
-  }
-  return DEFAULT_LANG
+  if (typeof window === 'undefined') return 'en'
+  try {
+    const saved = localStorage.getItem('preferred-language')
+    if (saved && LANGUAGES.includes(saved as Language)) return saved as Language
+    for (const lang of (navigator.languages || [navigator.language])) {
+      const normalized = lang.toLowerCase().split('-')[0]
+      if (normalized in LANGUAGE_MAPPING) return LANGUAGE_MAPPING[normalized]
+      if (lang.toLowerCase() in LANGUAGE_MAPPING) return LANGUAGE_MAPPING[lang.toLowerCase()]
+    }
+    return 'en'
+  } catch { return 'en' }
 }
 
-export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<Language>(DEFAULT_LANG)
+interface LanguageContextType {
+  language: Language
+  setLanguage: (lang: Language) => void
+  t: (key: string, variables?: Record<string, string | number>) => string
+}
 
-  useEffect(() => {
-    const stored = localStorage.getItem(STORAGE_KEY)
-    if (stored && (LANGUAGES as readonly string[]).includes(stored)) {
-      setLanguageState(stored as Language)
-    } else {
-      const detected = detectLanguage()
-      setLanguageState(detected)
-      localStorage.setItem(STORAGE_KEY, detected)
-    }
-  }, [])
+const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
+
+export function LanguageProvider({ children }: { children: ReactNode }) {
+  const [language, setLanguageState] = useState<Language>('en')
 
   const setLanguage = useCallback((lang: Language) => {
+    if (!LANGUAGES.includes(lang)) lang = 'en'
     setLanguageState(lang)
-    localStorage.setItem(STORAGE_KEY, lang)
+    if (typeof window !== 'undefined') localStorage.setItem('preferred-language', lang)
   }, [])
 
-  const t = useCallback(
-    (key: string, vars?: Record<string, string | number>): string => {
-      let text = resolve(translations[language] as unknown, key)
-      if (vars) {
-        for (const [k, v] of Object.entries(vars)) {
-          text = text.replaceAll(`{{${k}}}`, String(v))
-        }
-      }
-      return text
-    },
-    [language],
-  )
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const detected = detectLanguage()
+    setLanguageState(detected)
+    localStorage.setItem('preferred-language', detected)
+  }, [])
 
-  return (
-    <LanguageContext value={{ language, setLanguage, t }}>
-      {children}
-    </LanguageContext>
-  )
+  useEffect(() => {
+    if (typeof document === 'undefined') return
+    document.documentElement.lang = language
+  }, [language])
+
+  const t = useCallback((key: string, variables?: Record<string, string | number>): string => {
+    const keys = key.split('.')
+    let value: unknown = translations[language] ?? translations.en
+    for (const k of keys) {
+      if (value && typeof value === 'object' && k in value) {
+        value = (value as Record<string, unknown>)[k]
+      } else { return key }
+    }
+    let result = typeof value === 'string' ? value : key
+    if (variables) {
+      for (const [name, val] of Object.entries(variables)) {
+        result = result.replace(new RegExp(`\\{\\{${name}\\}\\}`, 'g'), () => String(val))
+      }
+    }
+    return result
+  }, [language])
+
+  const contextValue = useMemo(() => ({ language, setLanguage, t }), [language, setLanguage, t])
+  return <LanguageContext.Provider value={contextValue}>{children}</LanguageContext.Provider>
 }
 
 export function useLanguage() {
-  const ctx = useContext(LanguageContext)
-  if (!ctx) throw new Error('useLanguage must be used within LanguageProvider')
-  return ctx
+  const context = useContext(LanguageContext)
+  if (!context) throw new Error('useLanguage must be used within a LanguageProvider')
+  return context
 }

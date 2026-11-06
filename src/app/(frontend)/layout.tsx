@@ -3,8 +3,8 @@ import type { Metadata, Viewport } from "next"
 import { LanguageProvider } from "@/providers/LanguageProvider"
 import "./styles.css"
 
-const title = "still"
-const description = "An anonymous community card app for short reflective thoughts"
+const title = "Ameen"
+const description = "Share your duas anonymously. Strangers pray for you."
 
 export const viewport: Viewport = {
   width: "device-width",

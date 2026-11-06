@@ -1,54 +1,36 @@
-import type { TranslationKeys } from './index'
-
-export const de: TranslationKeys = {
+export const de: typeof import('./en').en = {
   common: {
     loading: 'Laden…',
     error: 'Etwas ist schiefgelaufen',
-    submit: 'Absenden',
     cancel: 'Abbrechen',
+    submit: 'Absenden',
     delete: 'Löschen',
     edit: 'Bearbeiten',
-    save: 'Speichern',
     close: 'Schließen',
     back: 'Zurück',
   },
+  onboarding: {
+    title: 'Willkommen bei Ameen',
+    subtitle: 'Ein Ort, um deine Duas anonym zu teilen',
+    explanation: 'Teile ein Dua. Fremde beten für dich, indem sie Ameen sagen.',
+    start: 'Bismillah',
+  },
   feed: {
-    title: 'Entdecken',
-    empty: 'Gerade keine Duas. Schau später nochmal vorbei.',
-    onboarding: {
-      title: 'Willkommen bei Ameen',
-      subtitle: 'Wische nach rechts für Ameen. Wische nach links zum Überspringen.',
-      start: 'Los geht’s',
-    },
-    cover: {
-      title: 'Ameen',
-      subtitle: 'Jemand braucht dein Dua',
-    },
-    breathing: {
-      title: 'Nimm dir einen Moment',
-    },
-    summary: {
-      title: 'Sitzung beendet',
-      ameenCount: 'Du hast {{count}} Mal Ameen gesagt',
-      passCount: 'Du hast {{count}} Mal übersprungen',
-      done: 'Fertig',
-      keepGoing: 'Weitermachen',
-    },
+    coverTitle: 'Bismillah',
+    emptyState: 'Gerade keine Duas. Schau später nochmal vorbei.',
+    emptyNudge: 'Oder teile selbst ein Dua.',
+    sessionSummary: 'Du hast für {{count}} Duas Ameen gesagt',
+    postNudge: 'Möchtest du ein Dua teilen?',
+    undoPass: 'Rückgängig',
   },
   card: {
     categories: {
-      general: 'Allgemein',
       health: 'Gesundheit',
-      family: 'Familie',
-      finances: 'Finanzen',
       guidance: 'Rechtleitung',
-      forgiveness: 'Vergebung',
-      deceased: 'Verstorbene',
       hardship: 'Prüfung',
-    },
-    swipe: {
-      ameen: 'Ameen',
-      pass: 'Überspringen',
+      gratitude: 'Dankbarkeit',
+      family: 'Familie',
+      general: 'Allgemein',
     },
   },
   create: {
@@ -56,29 +38,28 @@ export const de: TranslationKeys = {
     placeholder: 'Schreib dein Dua hier…',
     categoryLabel: 'Kategorie',
     submitting: 'Wird gesendet…',
-    reviewNote: 'Dein Dua wird geprüft, bevor es veröffentlicht wird.',
+    success: 'Dein Dua wurde zur Prüfung eingereicht',
   },
   myDuas: {
     title: 'Meine Duas',
-    empty: 'Du hast noch keine Duas geteilt.',
-    ameenCount: '{{count}} Ameen',
+    empty: 'Du hast noch keine Duas geteilt',
     status: {
       pending: 'Wird geprüft',
       approved: 'Veröffentlicht',
-      rejected: 'Abgelehnt',
+      rejected: 'Nicht freigegeben',
     },
-    deleteConfirm: 'Bist du sicher, dass du dieses Dua löschen möchtest?',
-    editReviewNote: 'Bearbeiten schickt dein Dua zurück zur Prüfung.',
+    ameenCount: '{{count}} Ameen',
+    deleteConfirm: 'Dieses Dua löschen?',
   },
   review: {
     title: 'Prüfwarteschlange',
-    empty: 'Keine Duas zur Prüfung.',
     approve: 'Genehmigen',
     reject: 'Ablehnen',
+    empty: 'Keine Duas zur Prüfung',
   },
-  nav: {
-    feed: 'Feed',
-    myDuas: 'Meine Duas',
-    review: 'Prüfen',
+  language: {
+    en: 'English',
+    de: 'Deutsch',
+    switchLabel: 'Sprache',
   },
 }
