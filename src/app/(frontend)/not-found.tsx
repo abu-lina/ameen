@@ -1,11 +1,5 @@
 import Link from "next/link"
 
-/**
- * Custom not-found page for the frontend.
- * This renders when `notFound()` is called from any page in the (frontend) route group.
- *
- * Customize this component to match your app's design and provide helpful navigation.
- */
 export default function NotFound() {
   return (
     <main className="mx-auto flex min-h-[50vh] max-w-2xl flex-col items-center justify-center px-8 py-16 text-center">

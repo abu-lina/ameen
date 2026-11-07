@@ -1,1 +1,0 @@
-export const POST_CHARACTER_LIMIT = 330
