@@ -1,0 +1,65 @@
+export const de: typeof import('./en').en = {
+  common: {
+    loading: 'Laden…',
+    error: 'Etwas ist schiefgelaufen',
+    cancel: 'Abbrechen',
+    submit: 'Absenden',
+    delete: 'Löschen',
+    edit: 'Bearbeiten',
+    close: 'Schließen',
+    back: 'Zurück',
+  },
+  onboarding: {
+    title: 'Willkommen bei Ameen',
+    subtitle: 'Ein Ort, um deine Duas anonym zu teilen',
+    explanation: 'Teile ein Dua. Fremde beten für dich, indem sie Ameen sagen.',
+    start: 'Bismillah',
+  },
+  feed: {
+    coverTitle: 'Bismillah',
+    emptyState: 'Gerade keine Duas. Schau später nochmal vorbei.',
+    emptyNudge: 'Oder teile selbst ein Dua.',
+    sessionSummary: 'Du hast für {{count}} Duas Ameen gesagt',
+    postNudge: 'Möchtest du ein Dua teilen?',
+    undoPass: 'Rückgängig',
+  },
+  card: {
+    categories: {
+      health: 'Gesundheit',
+      guidance: 'Rechtleitung',
+      hardship: 'Prüfung',
+      gratitude: 'Dankbarkeit',
+      family: 'Familie',
+      general: 'Allgemein',
+    },
+  },
+  create: {
+    title: 'Dua teilen',
+    placeholder: 'Schreib dein Dua hier…',
+    categoryLabel: 'Kategorie',
+    submitting: 'Wird gesendet…',
+    success: 'Dein Dua wurde zur Prüfung eingereicht',
+  },
+  myDuas: {
+    title: 'Meine Duas',
+    empty: 'Du hast noch keine Duas geteilt',
+    status: {
+      pending: 'Wird geprüft',
+      approved: 'Veröffentlicht',
+      rejected: 'Nicht freigegeben',
+    },
+    ameenCount: '{{count}} Ameen',
+    deleteConfirm: 'Dieses Dua löschen?',
+  },
+  review: {
+    title: 'Prüfwarteschlange',
+    approve: 'Genehmigen',
+    reject: 'Ablehnen',
+    empty: 'Keine Duas zur Prüfung',
+  },
+  language: {
+    en: 'English',
+    de: 'Deutsch',
+    switchLabel: 'Sprache',
+  },
+}

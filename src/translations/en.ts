@@ -1,0 +1,65 @@
+export const en = {
+  common: {
+    loading: 'Loading...',
+    error: 'Something went wrong',
+    cancel: 'Cancel',
+    submit: 'Submit',
+    delete: 'Delete',
+    edit: 'Edit',
+    close: 'Close',
+    back: 'Back',
+  },
+  onboarding: {
+    title: 'Welcome to Ameen',
+    subtitle: 'A place to share your duas anonymously',
+    explanation: 'Post a dua. Strangers pray for you by saying Ameen.',
+    start: 'Bismillah',
+  },
+  feed: {
+    coverTitle: 'Bismillah',
+    emptyState: 'No duas right now. Come back later.',
+    emptyNudge: 'Or share a dua of your own.',
+    sessionSummary: 'You said Ameen for {{count}} duas',
+    postNudge: 'Want to share a dua?',
+    undoPass: 'Undo',
+  },
+  card: {
+    categories: {
+      health: 'Health',
+      guidance: 'Guidance',
+      hardship: 'Hardship',
+      gratitude: 'Gratitude',
+      family: 'Family',
+      general: 'General',
+    },
+  },
+  create: {
+    title: 'Share a Dua',
+    placeholder: 'Write your dua here...',
+    categoryLabel: 'Category',
+    submitting: 'Submitting...',
+    success: 'Your dua has been submitted for review',
+  },
+  myDuas: {
+    title: 'My Duas',
+    empty: "You haven't shared any duas yet",
+    status: {
+      pending: 'Under review',
+      approved: 'Live',
+      rejected: 'Not approved',
+    },
+    ameenCount: '{{count}} Ameen',
+    deleteConfirm: 'Delete this dua?',
+  },
+  review: {
+    title: 'Review Queue',
+    approve: 'Approve',
+    reject: 'Reject',
+    empty: 'No duas to review',
+  },
+  language: {
+    en: 'English',
+    de: 'Deutsch',
+    switchLabel: 'Language',
+  },
+}
