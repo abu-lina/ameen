@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next"
 import { LanguageProvider } from "@/providers/LanguageProvider"
+import { AuthInit } from "@/components/auth-init"
 import "./(frontend)/styles.css"
 
 const title = "Ameen"
@@ -29,6 +30,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="min-h-screen bg-white text-zinc-950 antialiased">
         <LanguageProvider>
+          <AuthInit />
           <div id="root" tabIndex={-1}>
             {children}
           </div>
